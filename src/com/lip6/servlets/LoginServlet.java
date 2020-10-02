@@ -9,7 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.lip6.daos.DAOContact;
@@ -19,12 +24,16 @@ import com.lip6.entities.Contact;
 import com.lip6.entities.PhoneNumber;
 
 
-public class LoginServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+@Controller
+public class LoginServlet  {
+	
        
     /**
      * @see HttpServlet#HttpServlet()
      */
+	
+	@Autowired
+	private ApplicationContext context;
     public LoginServlet() {
         super();
         // TODO Auto-generated constructor stub
@@ -33,18 +42,11 @@ public class LoginServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+    @RequestMapping("/")
+    @ResponseBody
+	protected String index(){
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-        ApplicationContext context = WebApplicationContextUtils.getWebApplicationContext(getServletContext());
-		
 		String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
@@ -56,24 +58,35 @@ public class LoginServlet extends HttpServlet {
 		//Contact c2 = (Contact) context.getBean("contact2");
 		
 		idao.addContact(c);
-		//idao.addContact(c2);
+           return "Ecriture database";
+	}
+    @RequestMapping("get")
+    @ResponseBody
+	protected String get() {
+		// TODO Auto-generated method stub
+           return "Ecriture database";
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+    @RequestMapping(value="post",method=RequestMethod.POST)
+	protected String post() throws ServletException, IOException {
+		// TODO Auto-generated method stub
+   
+		String[] allBeanNames = context.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName + "******************");
+        }
 		
+		IDAOContact idao = (IDAOContact) context.getBean("cdao");		
 		
+		Contact c = (Contact) context.getBean("contact1");
+		//Contact c2 = (Contact) context.getBean("contact2");
 		
-		
-	/*	DAOContact c = new DAOContact();
-		//DAOGroup g = new DAOGroup();
-		//c.addContact("Thibault", "Anani", "thuny.ta@gmail.com");
-		c.addContact("Thibault", "Anani", "thuny.ta@gmail.com","Square des corolles", "Courbevoie", "11", "France");
-		//g.addGroup("M2 Miage");
-		DAOContactGroup g = new DAOContactGroup();
-		g.addContactToContactGroup(1, 2);
-		g.createGroup("Doctorants MIAGE");
-		//g.removeContactToContactGroup(1, 1);
-		g.removeContactGroup(1);
-		*/
-		
-		doGet(request, response);
+		idao.addContact(c);
+	
+	    return get();
 	}
 
 }
