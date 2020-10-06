@@ -22,27 +22,24 @@ import com.lip6.daos.IDAOContact;
 import com.lip6.entities.Contact;
 import com.lip6.entities.PhoneNumber;
 
+import java.util.Map;
 
 @Controller
+
 public class IndexController  {
 
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public IndexController() {
-        super();
-        // TODO Auto-generated constructor stub
+ 
+	@RequestMapping("/")
+    public String index() {
+      
+        return "index";
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-    
-    @RequestMapping(value="/", method= RequestMethod.GET)
-    @ResponseBody
-    public String index() {
-    	return "Bienvenue sur Carnet Contact";
+    @RequestMapping(value="/test", method= RequestMethod.GET)
+    public String test() {
+   
+        return "test";
     }
 
 
