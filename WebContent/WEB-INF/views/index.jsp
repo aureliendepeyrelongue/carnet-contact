@@ -18,7 +18,7 @@
         <h5 class="header col s12 light text-bold"><strong>Recherchez et modifiez vos contacts au sein de notre application.</strong></h5>
       </div>
       <div class="row center">
-        <a href="/CarnetContactStart/contact-create" id="download-button" class="btn-large waves-effect   waves-light">C'est parti !</a>
+        <a href="/CarnetContactStart/contact-create" id="download-button" class="btn-large waves-effect blue darken-3  waves-light">C'est parti !</a>
       </div>
       <br><br>
 
