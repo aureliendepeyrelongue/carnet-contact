@@ -9,7 +9,7 @@
 </head>
 <body>
 <%@ include file="./fragments/navbar.jspf" %>
-  ...
+
   <div class="section " id="index-banner">
     <div class="container">
    
