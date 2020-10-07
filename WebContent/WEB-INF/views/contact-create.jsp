@@ -10,7 +10,7 @@
 <body>
 <%@ include file="./fragments/navbar.jspf" %>
   ...
- <div class="container z-depth-2">
+ <div id="main-container" class="container z-depth-2">
    
      
       <div class="row">
@@ -53,7 +53,7 @@
       </div>
            <div class="row">
         <div class="input-field col s12">
-         <button class="btn waves-effect waves-light green right" type="submit" name="action">Créer
+         <button class="btn waves-effect waves-light right" type="submit" name="action">Créer
     <i class="material-icons right">send</i>
   </button>
         

@@ -10,7 +10,7 @@
 <body>
 <%@ include file="./fragments/navbar.jspf" %>
   ...
- <div class="container z-depth-2">
+ <div id="main-container" class="container z-depth-2">
    
      
       <div class="row">

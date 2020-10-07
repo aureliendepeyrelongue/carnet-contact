@@ -10,15 +10,15 @@
 <body>
 <%@ include file="./fragments/navbar.jspf" %>
   ...
-  <div class="section no-pad-bot" id="index-banner">
+  <div class="section " id="index-banner">
     <div class="container">
-      <br><br>
-      <h1 class="header center deep-purple-text">Bienvenue</h1>
+   
+      <h1 class="header center  accent-3">Bienvenue</h1>
       <div class="row center">
-        <h5 class="header col s12 light">Recherchez et modifiez vos contacts au sein de notre application.</h5>
+        <h5 class="header col s12 light text-bold"><strong>Recherchez et modifiez vos contacts au sein de notre application.</strong></h5>
       </div>
       <div class="row center">
-        <a href="/CarnetContactStart/contact-create" id="download-button" class="btn-large waves-effect waves-light">C'est parti !</a>
+        <a href="/CarnetContactStart/contact-create" id="download-button" class="btn-large waves-effect  red accent-2 waves-light">C'est parti !</a>
       </div>
       <br><br>
 

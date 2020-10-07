@@ -1,6 +1,6 @@
-<nav class="deep-purple darken-3" role="navigation">
+<nav class=" indigo  accent-3" role="navigation">
     <div class="nav-wrapper container">
-    <a id="logo-container" href="/CarnetContactStart/" class="brand-logo">Carnet Contact</a>
+    <a id="logo-container" href="/CarnetContactStart/" class="brand-logo valign-wrapper" style="font-size:1.8rem;"><i class="large material-icons">texture</i><span style="display:flex;"><span style="margin:auto;">Carnet Contact</span></span></a>
       
   
       <ul class="right hide-on-med-and-down">
