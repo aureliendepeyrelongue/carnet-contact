@@ -19,7 +19,16 @@
  
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
+<<<<<<< HEAD
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
+=======
+    <url-pattern>/</url-pattern>
+  </servlet-mapping>
+  <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    
+    </welcome-file-list>
+>>>>>>> e9ad7e4d048cce39c524183ab85259f4b16c6cac
  
 </web-app>
