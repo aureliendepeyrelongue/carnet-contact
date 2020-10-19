@@ -1,6 +1,10 @@
 package com.lip6.daos;
 
+import org.springframework.stereotype.Repository;
+
 import com.lip6.entities.Contact;
+
+@Repository
 
 public interface IDAOContact {
 

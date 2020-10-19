@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="java.util.List" %>
+        <%@ page import="com.lip6.entities.Contact" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -30,6 +32,50 @@
       </form>
       </div>
     </div>
+    
+          <div class="row">
+        <div class="col s12">
+
+
+    <%
+     List<Contact> cList = (List<Contact>)request.getAttribute("results");
+
+        		  if(cList!= null && cList.size() != 0){
+        			  
+        			  %>
+        			  <ul class="collection">
+        			  
+        			  <% 
+        			  for(Contact c : cList){
+        		
+ 
+        			  %>
+        			   
+      <li class="collection-item avatar">
+      <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="" class="circle">
+      <span class="title"><%= c.getFirstName() %> <%= c.getLastName() %></span>
+      <p><%= c.getEmail() %><br>
+        <%= c.getAddress().getCountry()%><br>
+         <%= c.getAddress().getZip()%> - <%= c.getAddress().getCity()%> - <%= c.getAddress().getStreet()%>
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  
+        			  
+        			     
+        			  <% 
+        			  }
+        			  
+        			  %>
+        			      </ul>
+        			  <%  
+        		  }
+    %>
+         
+    
+      </div>
+    </div>
+    
   </div>
 
   

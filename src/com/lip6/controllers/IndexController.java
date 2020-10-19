@@ -4,8 +4,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +24,11 @@ import java.util.Map;
 
 public class IndexController  {
 
+	@Autowired
+	ApplicationContext context;
+	
+	@Autowired
+	DAOContact cdao ;
        
  
 	@RequestMapping("/")
@@ -37,6 +41,19 @@ public class IndexController  {
     public String test() {
    
         return "test";
+    }
+    
+    @RequestMapping("/add-data")
+    public String addData() {
+    
+    	Contact contact1 = (Contact)context.getBean("contact1");
+    	Contact contact2 = (Contact)context.getBean("contact2");
+    	cdao.addContact(contact1);
+    	cdao.addContact(contact2);
+    	
+   
+    	
+        return "index";
     }
 
 

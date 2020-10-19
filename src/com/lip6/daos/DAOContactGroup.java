@@ -3,12 +3,15 @@ package com.lip6.daos;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.springframework.stereotype.Repository;
+
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
 import com.lip6.entities.ContactGroup;
 import com.lip6.entities.PhoneNumber;
 import com.lip6.util.JpaUtil;
 
+@Repository
 public class DAOContactGroup implements IDAOContactGroup {
 
 	@Override

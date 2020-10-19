@@ -1,5 +1,7 @@
 package com.lip6.daos;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,12 +10,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
 import com.lip6.entities.ContactGroup;
 import com.lip6.entities.PhoneNumber;
 import com.lip6.util.JpaUtil;
 
+@Repository
 public class DAOContact implements IDAOContact{
 
 	
@@ -149,6 +154,25 @@ public class DAOContact implements IDAOContact{
 		
 	}
 	
+	
+	@SuppressWarnings("unchecked")
+	public List<Contact> findAll(){
+		List<Contact> cList = null;
+		
+		try {
+		    EntityManager em=JpaUtil.getEmf().createEntityManager();
+		    
+			cList = (List<Contact>)em.createQuery("SELECT c FROM Contact c").getResultList();
+		  
+		}
+		
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return cList;
+	}
 	
 	
 }
