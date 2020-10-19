@@ -18,7 +18,6 @@ import java.util.Map;
 
 
 @Controller
-@RequestMapping(value="/hello")
 public class HelloServlet {
 	  /**
 	 * 
@@ -28,10 +27,9 @@ public class HelloServlet {
 
 	  
 	
-	@RequestMapping("/test")
-	@ResponseBody
+	@RequestMapping("/")
 	public String index() {
-		return "Coucou mon ami";
+		return "hello";
 	}
 	
 }

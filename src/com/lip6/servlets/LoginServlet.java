@@ -43,22 +43,10 @@ public class LoginServlet  {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
     
-    @RequestMapping("/")
-    @ResponseBody
+    @RequestMapping("/blabla")
 	protected String index(){
-		// TODO Auto-generated method stub
-		String[] allBeanNames = context.getBeanDefinitionNames();
-        for(String beanName : allBeanNames) {
-            System.out.println(beanName + "******************");
-        }
-		
-		IDAOContact idao = (IDAOContact) context.getBean("cdao");		
-		
-		Contact c = (Contact) context.getBean("contact1");
-		//Contact c2 = (Contact) context.getBean("contact2");
-		
-		idao.addContact(c);
-           return "Ecriture database";
+
+    	return "hello";
 	}
     @RequestMapping("get")
     @ResponseBody
