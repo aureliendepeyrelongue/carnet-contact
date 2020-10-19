@@ -1,6 +1,14 @@
 body {
-	background-image: url("../images/mountains5.jpg");
+	background: url("../images/vector.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.index-page{
+	background: url("../images/vector.jpg");
   /* Center and scale the image nicely */
+ 
  
   background-repeat: no-repeat;
   background-size: cover;
