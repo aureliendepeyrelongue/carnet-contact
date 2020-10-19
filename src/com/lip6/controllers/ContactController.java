@@ -13,6 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -35,6 +36,14 @@ public class ContactController {
 	
 	@RequestMapping("/contact-search")
 	public String getContactSearch() {
+		return "contact-search";
+	}
+	
+	@RequestMapping(value="/contact-search-post", method = RequestMethod.POST)
+	public String postContactSearch(@RequestParam("search") String search) {
+		
+		System.out.println(search);
+		
 		return "contact-search";
 	}
 
