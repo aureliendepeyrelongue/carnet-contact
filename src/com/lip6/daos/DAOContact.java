@@ -174,5 +174,29 @@ public class DAOContact implements IDAOContact{
 		return cList;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public Contact findContactByLastNameAndEmail(String lastName, String email){
+	   Contact contact = null;
+		
+		try {
+		    EntityManager em= JpaUtil.getEmf().createEntityManager();
+		    
+			List<Contact>cList = (List<Contact>)em.createQuery("SELECT c FROM Contact c WHERE c.lastName LIKE :lastName AND c.email LIKE :email")
+					.setParameter("lastName", lastName)
+					.setParameter("email", email)
+					.getResultList();
+
+			contact = cList.size() > 0 ? cList.get(0) : null;
+		  
+		}
+		
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return contact;
+	}
+	
 	
 }

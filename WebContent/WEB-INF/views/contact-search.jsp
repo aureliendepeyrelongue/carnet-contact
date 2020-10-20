@@ -13,14 +13,11 @@
 <%@ include file="./fragments/navbar.jspf" %>
   
  <div id="main-container" class="container z-depth-2">
-   
-     
       <div class="row">
     <div class="col s12">
     <h5 class="header grey-text ">Rechercher un/des contacts</h5>
 </div>
 </div>
-
       <div class="row">
         <div class="col s12">
     <form method="POST" action="/CarnetContactStart/contact-search-post">
@@ -32,23 +29,15 @@
       </form>
       </div>
     </div>
-    
           <div class="row">
         <div class="col s12">
-
-
     <%
      List<Contact> cList = (List<Contact>)request.getAttribute("results");
-
         		  if(cList!= null && cList.size() != 0){
-        			  
         			  %>
         			  <ul class="collection">
-        			  
         			  <% 
         			  for(Contact c : cList){
-        		
- 
         			  %>
         			   
       <li class="collection-item avatar">
@@ -71,17 +60,10 @@
         			  <%  
         		  }
     %>
-         
-    
       </div>
     </div>
-    
   </div>
 
-  
-
-    
-  
   .<%@ include file="./fragments/footer.jspf" %>
    .<%@ include file="./fragments/scripts.jspf" %>
 </body>
