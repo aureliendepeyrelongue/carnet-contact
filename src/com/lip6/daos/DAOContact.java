@@ -1,5 +1,7 @@
 package com.lip6.daos;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,12 +11,15 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Query;
 
+import org.springframework.stereotype.Repository;
+
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
 import com.lip6.entities.ContactGroup;
 import com.lip6.entities.PhoneNumber;
 import com.lip6.util.JpaUtil;
 
+@Repository
 public class DAOContact implements IDAOContact{
 
 	
@@ -152,7 +157,6 @@ public class DAOContact implements IDAOContact{
 	
 	public List<Contact> allContact() {
 
-
         EntityManager em=JpaUtil.getEmf().createEntityManager();
         EntityTransaction tx =  em.getTransaction();
         tx.begin();
@@ -186,9 +190,8 @@ public class DAOContact implements IDAOContact{
 	}
 	
 	public boolean deleteContact(long Id) {
-
+    
 	    boolean success=false;
-
 		try {
 	    EntityManager em=JpaUtil.getEmf().createEntityManager();
 
@@ -290,6 +293,45 @@ public class DAOContact implements IDAOContact{
 		return success;
 	}
 	
+
+	@SuppressWarnings("unchecked")
+	public List<Contact> findAll(){
+		List<Contact> cList = null;
+		try {
+		  EntityManager em=JpaUtil.getEmf().createEntityManager(); 
+			cList = (List<Contact>)em.createQuery("SELECT c FROM Contact c").getResultList();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		return cList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public Contact findContactByLastNameAndEmail(String lastName, String email){
+	   Contact contact = null;
+		
+		try {
+		    EntityManager em= JpaUtil.getEmf().createEntityManager();
+		    
+			List<Contact>cList = (List<Contact>)em.createQuery("SELECT c FROM Contact c WHERE c.lastName LIKE :lastName AND c.email LIKE :email")
+					.setParameter("lastName", lastName)
+					.setParameter("email", email)
+					.getResultList();
+
+			contact = cList.size() > 0 ? cList.get(0) : null;
+		  
+		}
+		
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return contact;
+	}
+	
+
 	public boolean deletePhone(long Id, Set<Long> ids) {
 	    boolean success=false;
 
@@ -323,5 +365,6 @@ public class DAOContact implements IDAOContact{
 		}
 		return success;
 	}
+
 	
 }

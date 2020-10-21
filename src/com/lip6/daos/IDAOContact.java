@@ -1,14 +1,19 @@
 package com.lip6.daos;
 
+
+import org.springframework.stereotype.Repository;
+
 import java.util.List;
 import java.util.Set;
+
 
 import com.lip6.entities.Contact;
 import com.lip6.entities.PhoneNumber;
 
+@Repository
+
 public interface IDAOContact {
 
-	
 	public boolean addContact(String lastname, String firstname, String email, String street, String city, String zip, String country);
 
 	public boolean addContact(Contact contact);

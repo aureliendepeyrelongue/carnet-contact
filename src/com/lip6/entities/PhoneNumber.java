@@ -20,7 +20,7 @@ public class PhoneNumber implements Serializable {
 	private String phoneNumber;
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name="id_contact")
 	private Contact contact=null;
 	

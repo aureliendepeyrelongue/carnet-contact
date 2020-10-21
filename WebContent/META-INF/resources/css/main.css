@@ -1,5 +1,17 @@
 body {
-	background:#fff;
+	background: url("../images/vector.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.index-page{
+	background: url("../images/vector.jpg");
+  /* Center and scale the image nicely */
+ 
+ 
+  background-repeat: no-repeat;
+  background-size: cover;
 
 }
 
@@ -7,4 +19,9 @@ body {
 	background:#fff;
 	opacity:0.9;
 	margin-top:40px;
+	
+}
+
+ul.collection li.collection-item span.title{
+	font-weight:bold;
 }

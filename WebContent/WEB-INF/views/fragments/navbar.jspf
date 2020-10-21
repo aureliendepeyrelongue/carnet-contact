@@ -1,13 +1,43 @@
+
+<ul id="dropdown-contact" class="dropdown-content">
+     <li><a class="blue-text" href="/CarnetContactStart/contact-create">CrÃ©er un contact</a></li>
+     <li><a href="/CarnetContactStart/contact-list">Liste des contacts</a></li>
+     <li><a  class="blue-text" href="/CarnetContactStart/contact-search">Rechercher des contacts</a></li>
+       
+</ul>
+<ul id="dropdown-contact-group" class="dropdown-content ">
+         <li><a class="blue-text" href="/CarnetContactStart/contact-group-create">CrÃ©er un groupe</a></li>
+         <li><a class="blue-text" href="/CarnetContactStart/contact-group-list">Liste des groupes</a></li>
+         <li><a class="blue-text" href="/CarnetContactStart/contact-group-search">Rechercher un/des groupes</a></li>
+       
+</ul>
+
 <nav class=" blue  darken-4" role="navigation">
     <div class="nav-wrapper container">
     <a id="logo-container" href="/CarnetContactStart/" class="brand-logo valign-wrapper" style="font-size:1.8rem;"><i class="large material-icons">texture</i><span style="display:flex;"><span style="margin:auto;">Carnet Contact</span></span></a>
       
   
       <ul class="right hide-on-med-and-down">
-      	<li><a href="/CarnetContactStart/contact-list">Liste des contacts</a></li>
-	        <li><a href="/CarnetContactStart/contact-create">Créer un contact</a></li>
-	          <li><a href="/CarnetContactStart/contact-search">Rechercher des contacts</a></li>
-	            <li><a href="/CarnetContactStart/contact-group-create">Créer un groupe</a></li>
+
+       <li><a class="dropdown-trigger blue darken-4" href="#!" data-target="dropdown-contact">Actions contacts<i class="material-icons right">arrow_drop_down</i></a></li>
+         <li><a class="dropdown-trigger blue darken-4" href="#!" data-target="dropdown-contact-group">Actions groupes<i class="material-icons right">arrow_drop_down</i></a></li>
+      
+       <%
+       String authenticated = (String) session.getAttribute("authenticated");
+       
+       if(authenticated != null && authenticated.equals("true"))
+       {  
+       %>
+       <li><form method="POST"  action="/CarnetContactStart/logout"><button class="waves-effect  blue darken-3 waves-light btn-small" type="submit">Logout</button></form></li>
+       <% } 
+       else{
+        %>
+            <li><a href="/CarnetContactStart/login">Login</a></li>
+       <% 
+        }
+       %>
+ 
+
       </ul>
 
       <ul id="nav-mobile" class="sidenav">

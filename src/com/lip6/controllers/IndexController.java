@@ -4,10 +4,10 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,16 +23,22 @@ import com.lip6.entities.PhoneNumber;
 import java.util.Map;
 
 @Controller
-
 public class IndexController  {
 
 	@Autowired
 	private ApplicationContext context;
+	
+	@Autowired
+	DAOContact cdao ;
  
 	@RequestMapping("/")
     public String index() {
-      
-		String[] allBeanNames = context.getBeanDefinitionNames();
+        return "index";
+    }
+
+    @RequestMapping(value="/test-bean", method= RequestMethod.GET)
+    public String testBean() {
+   		String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
@@ -46,11 +52,16 @@ public class IndexController  {
         
         return "index";
     }
-
-    @RequestMapping(value="/test", method= RequestMethod.GET)
-    public String test() {
-   
-        return "test";
+    
+    @RequestMapping("/add-data")
+    public String addData() {
+    
+    	Contact contact1 = (Contact)context.getBean("contact1");
+    	Contact contact2 = (Contact)context.getBean("contact2");
+    	cdao.addContact(contact1);
+    	cdao.addContact(contact2);
+ 
+      return "index";
     }
 
 

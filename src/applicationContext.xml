@@ -30,7 +30,6 @@
     </bean>
   
   
-<bean id="cdao" class="com.lip6.daos.DAOContact"/>
 
 <bean id="contact1" class="com.lip6.entities.Contact">
 	<property name="firstName" value="Thibault"/>
@@ -88,6 +87,38 @@
 	<property name="phoneKind" value="Portable"/>
 	<property name="phoneNumber" value="0634567854"/>
 	<property name="contact" ref="contact2"/>
+</bean>
+
+<bean id="phone4" class="com.lip6.entities.PhoneNumber">
+<property name="phoneKind" value="Fixe"/>
+<property name="phoneNumber" value="0123453421"/>
+<property name="contact" ref="contact2"/>
+</bean>
+
+<bean id="contact2" class="com.lip6.entities.Contact">
+<property name="firstName" value="Marie"/>
+<property name="lastName" value="Chevrel"/>
+<property name="email" value="marie.chevrel@gmail.com"/>
+<property name="address" ref="address2"/>
+<property name="phones">
+<set>
+<ref bean="phone3"/>
+<ref bean ="phone4"/>
+</set>
+</property>
+</bean>
+
+<bean id="address2" class="com.lip6.entities.Address">
+<property name="street" value="12 rue du lac"/>
+<property name="city" value="Sartrouville"/>
+<property name="zip" value="78600"/>
+<property name="country" value="France"/>
+</bean>
+
+<bean id="phone3" class="com.lip6.entities.PhoneNumber">
+<property name="phoneKind" value="Portable"/>
+<property name="phoneNumber" value="0634567854"/>
+<property name="contact" ref="contact2"/>
 </bean>
 
 <bean id="phone4" class="com.lip6.entities.PhoneNumber">

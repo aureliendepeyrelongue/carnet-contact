@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     <%@ page import="java.util.List" %>
-        <%@ page import="com.lip6.entities.Contact" %>
+        <%@ page import="com.lip6.entities.ContactGroup" %>
 <!doctype html>
 <html lang="fr">
 <head>
@@ -15,7 +15,7 @@
  <div id="main-container" class="container z-depth-2">
       <div class="row">
     <div class="col s12">
-    <h5 class="header grey-text ">Rechercher un/des contacts</h5>
+    <h5 class="header grey-text ">Rechercher un/des groupes de contact</h5>
 </div>
 </div>
       <div class="row">
@@ -32,20 +32,18 @@
           <div class="row">
         <div class="col s12">
     <%
-     List<Contact> cList = (List<Contact>)request.getAttribute("results");
+     List<ContactGroup> cList = (List<ContactGroup>)request.getAttribute("results");
         		  if(cList!= null && cList.size() != 0){
         			  %>
         			  <ul class="collection">
         			  <% 
-        			  for(Contact c : cList){
+        			  for(ContactGroup cg : cList){
         			  %>
-        			   
       <li class="collection-item avatar">
       <img src="https://iupac.org/wp-content/uploads/2018/05/default-avatar.png" alt="" class="circle">
-      <span class="title"><%= c.getFirstName() %> <%= c.getLastName() %></span>
-      <p><%= c.getEmail() %><br>
-        <%= c.getAddress().getCountry()%><br>
-         <%= c.getAddress().getZip()%> - <%= c.getAddress().getCity()%> - <%= c.getAddress().getStreet()%>
+      <span class="title"><%= cg.getGroupName() %> </span>
+      <p>Composé de <%=  cg.getContacts().size() %> adhérents.<br>
+      <a href="/CarnetContactStart/contact-group-details?groupId=<%=cg.getId()%>">Plus de détails -></a>
       </p>
       <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
     </li>

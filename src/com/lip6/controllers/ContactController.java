@@ -5,13 +5,17 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import org.springframework.ui.ModelMap;
+
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -24,23 +28,21 @@ import com.lip6.daos.IDAOContact;
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
 import com.lip6.entities.PhoneNumber;
+import com.lip6.services.ContactService;
 
 import java.util.Map;
 
 @Controller
 public class ContactController {
 	
+	@Autowired
+	private ContactService contactService;
 	
 	@RequestMapping("/contact-create")
 	public String getContactCreate() {
 		return "contact-create";
 	}
-	
-	@RequestMapping("/contact-search")
-	public String getContactSearch() {
-		return "contact-search";
-	}
-	
+
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
 	public String addContact(@RequestParam Map<String, String> params) { 
 		String firstName = params.get("firstName");
@@ -73,15 +75,21 @@ public class ContactController {
 		
 	    return "redirect:contact-list";
 	}
-	
-	@RequestMapping(value="/contact-search-post", method = RequestMethod.POST)
-	public String postContactSearch(@RequestParam("search") String search) {
+  	
+	@RequestMapping("/contact-search")
+	public String getContactSearch() {
+		return "contact-search";
+	}
+
+	@RequestMapping(value="/contact-search", method = RequestMethod.POST)
+	public String postContactSearch(ModelMap model,@RequestParam("search") String search) {
 		
-		System.out.println(search);
+		List<Contact> results = contactService.getSearchedContacts(search);
+		model.addAttribute("results", results);
 		
 		return "contact-search";
 	}
-	
+
 	@RequestMapping("/contact-list")
 	public String getListContact(Model model) {
 		
