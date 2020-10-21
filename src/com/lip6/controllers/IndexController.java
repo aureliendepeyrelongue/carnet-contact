@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Scope;
@@ -22,27 +23,34 @@ import com.lip6.entities.PhoneNumber;
 import java.util.Map;
 
 @Controller
-@Scope("session")
-
 public class IndexController  {
 
 	@Autowired
-	ApplicationContext context;
+	private ApplicationContext context;
 	
 	@Autowired
 	DAOContact cdao ;
-       
  
 	@RequestMapping("/")
     public String index() {
-      
         return "index";
     }
 
-    @RequestMapping(value="/test", method= RequestMethod.GET)
-    public String test() {
-   
-        return "test";
+    @RequestMapping(value="/test-bean", method= RequestMethod.GET)
+    public String testBean() {
+   		String[] allBeanNames = context.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName + "******************");
+        }
+        
+        DAOContact dao = new DAOContact();
+        Contact c =(Contact) context.getBean("contact1");
+        Contact c2 =(Contact) context.getBean("contact2");
+
+        dao.addContact(c2);
+        dao.addContact(c);
+        
+        return "index";
     }
     
     @RequestMapping("/add-data")
@@ -52,10 +60,8 @@ public class IndexController  {
     	Contact contact2 = (Contact)context.getBean("contact2");
     	cdao.addContact(contact1);
     	cdao.addContact(contact2);
-    	
-   
-    	
-        return "index";
+ 
+      return "index";
     }
 
 

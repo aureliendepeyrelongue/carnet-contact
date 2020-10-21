@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
-<!doctype html>
-<html lang="fr">
+<%@page import="com.lip6.entities.Contact"%>
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Accueil</title>
+<meta charset="ISO-8859-1">
+<title>Ajouter Téléphone</title>
   <%@ include file="./fragments/links.jspf" %>
   <script type='text/javascript'>
 	 function addFields(){
@@ -37,57 +38,16 @@
 
  <div id="main-container" class="container z-depth-2">
    
+     <% Contact contact = (Contact) request.getAttribute("contact"); %>
      
       <div class="row">
     <div class="col s12">
-    <h5 class="header grey-text ">Créer un contact</h5>
+    <h5 class="header grey-text ">Ajouter des numéros de téléphones</h5>
 </div>
 </div>
-
-      <div class="row">
-    <form class="col s12" method="post" action="/CarnetContactStart/addContact">
-      <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" name="firstName" type="text" class="validate"/>
-          <label for="firstName">Prénom</label>
-        </div>
-        <div class="input-field col s6">
-          <input name="lastName" type="text" class="validate">
-          <label for="lastName">Nom de famille</label>
-        </div>
-      </div>
-    
-   
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="email" type="email" class="validate">
-          <label for="email">Email</label>
-        </div>
-      </div>
-       <div class="row">
-        <div class="input-field col s12">
-          <input name="street" type="text" class="validate">
-          <label for="street">Rue</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="city" type="text" class="validate">
-          <label for="city">Ville</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="zip" type="text" class="validate">
-          <label for="zip">Code Postal</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input name="country" type="text" class="validate">
-          <label for="country">Pays</label>
-        </div>
-      </div>
+<div class="row">
+ <form class="col s12" method="post" action="/CarnetContactStart/addPhone">
+  <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
       <div class="row">
         <div class="input-field col s12">
 			<label>Nombre de numéro de téléphone: (max. 10)</label>
@@ -97,26 +57,19 @@
 		    	</div>
         	</div>
         </div>
-      </div>
            <div class="row">
         <div class="input-field col s12">
-         <button class="btn waves-effect waves-light right" type="submit" name="action">Créer
+         <button class="btn waves-effect waves-light right" type="submit" name="action">Ajouter
     <i class="material-icons right">send</i>
-  </button>
+      </button>
         
         
         </div>
       </div>
-    </form>
-    </div>
-  </div>
-
-  
-
-    
-  
+</form>
+</div>
+</div>
   .<%@ include file="./fragments/footer.jspf" %>
    .<%@ include file="./fragments/scripts.jspf" %>
 </body>
 </html>
-
