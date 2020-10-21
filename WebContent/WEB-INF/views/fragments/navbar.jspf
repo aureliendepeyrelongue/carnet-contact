@@ -1,12 +1,12 @@
 
 <ul id="dropdown-contact" class="dropdown-content">
-     <li><a class="blue-text" href="/CarnetContactStart/contact-create">CrÃ©er un contact</a></li>
+     <li><a class="blue-text" href="/CarnetContactStart/contact-create">Créer un contact</a></li>
      <li><a href="/CarnetContactStart/contact-list">Liste des contacts</a></li>
      <li><a  class="blue-text" href="/CarnetContactStart/contact-search">Rechercher des contacts</a></li>
        
 </ul>
 <ul id="dropdown-contact-group" class="dropdown-content ">
-         <li><a class="blue-text" href="/CarnetContactStart/contact-group-create">CrÃ©er un groupe</a></li>
+         <li><a class="blue-text" href="/CarnetContactStart/contact-group-create">Créer un groupe</a></li>
          <li><a class="blue-text" href="/CarnetContactStart/contact-group-list">Liste des groupes</a></li>
          <li><a class="blue-text" href="/CarnetContactStart/contact-group-search">Rechercher un/des groupes</a></li>
        

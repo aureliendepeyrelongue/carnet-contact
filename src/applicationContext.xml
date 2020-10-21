@@ -28,8 +28,6 @@
             <value>.jsp</value>
         </property>
     </bean>
-  
-  
 
 <bean id="contact1" class="com.lip6.entities.Contact">
 	<property name="firstName" value="Thibault"/>
@@ -38,8 +36,8 @@
 	<property name="address" ref="address1"/>
 	<property name="phones">
 		<set>
-			<ref bean="phones1"/>
-			<ref bean ="phones2"/>
+			<ref bean="phone1"/>
+			<ref bean ="phone2"/>
 		</set>
 	</property>
 </bean>
@@ -51,49 +49,18 @@
 	<property name="country" value="France"/>
 </bean>
 
-<bean id="phones1" class="com.lip6.entities.PhoneNumber">
+<bean id="phone1" class="com.lip6.entities.PhoneNumber">
 	<property name="phoneKind" value="Fixe"/>
 	<property name="phoneNumber" value= "0769320101"/>
 	<property name="contact" ref="contact1"/>
 </bean>
 
-<bean id="phones2" class="com.lip6.entities.PhoneNumber">
+<bean id="phone2" class="com.lip6.entities.PhoneNumber">
 	<property name="phoneKind" value="Portable"/>
 	<property name="phoneNumber" value= "0101010101"/>
 	<property name="contact" ref="contact1"/>
 </bean>
 
-<bean id="contact2" class="com.lip6.entities.Contact">
-	<property name="firstName" value="Paul"/>
-	<property name="lastName" value="Le servant"/>
-	<property name="email" value="paul.leservant@gmail.com"/>
-	<property name="address" ref="address2"/>
-	<property name="phones">
-		<set>
-			<ref bean="phone3"/>
-			<ref bean ="phone4"/>
-		</set>
-	</property>
-</bean>
-
-<bean id="address2" class="com.lip6.entities.Address">
-	<property name="street" value="11 rue du lac"/>
-	<property name="city" value="Maisons-Laffitte"/>
-	<property name="zip" value="78600"/>
-	<property name="country" value="France"/>
-</bean>
-
-<bean id="phone3" class="com.lip6.entities.PhoneNumber">
-	<property name="phoneKind" value="Portable"/>
-	<property name="phoneNumber" value="0634567854"/>
-	<property name="contact" ref="contact2"/>
-</bean>
-
-<bean id="phone4" class="com.lip6.entities.PhoneNumber">
-<property name="phoneKind" value="Fixe"/>
-<property name="phoneNumber" value="0123453421"/>
-<property name="contact" ref="contact2"/>
-</bean>
 
 <bean id="contact2" class="com.lip6.entities.Contact">
 <property name="firstName" value="Marie"/>

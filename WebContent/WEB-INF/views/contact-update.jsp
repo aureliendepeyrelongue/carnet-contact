@@ -86,5 +86,7 @@
     </form>
     </div>
     </div>
+      .<%@ include file="./fragments/footer.jspf" %>
+   .<%@ include file="./fragments/scripts.jspf" %>
 </body>
 </html>

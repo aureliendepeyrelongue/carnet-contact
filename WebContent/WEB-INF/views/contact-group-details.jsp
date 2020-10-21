@@ -41,9 +41,9 @@ if(cg!= null){
          <table>
         <thead>
           <tr>
+            <th > Id </th>
              <th>Prénom</th>
               <th>Nom</th>
-           
               <th>Email</th>
               <th>Ville</th>
           </tr>
@@ -52,10 +52,13 @@ if(cg!= null){
         <tbody>
         <% for(Contact c : cSet){%>
           <tr>
-            <td><%=c.getFirstName() %></td>
-            <td><%=c.getLastName() %></td>
-            <td><%=c.getEmail() %></td>
-            <td><%=c.getAddress().getCity()%></td>
+            <td><%= c.getId() %></td>
+            <td><form class="col s12" method="post" action="/CarnetContactStart/findContact">
+            <input type="hidden" name="Id" value="<%= c.getId() %>"/>
+            <a onclick="parentNode.submit();" style="cursor:pointer;"><%= c.getFirstName() %></a></form></td>
+            <td><%= c.getLastName() %></td>
+            <td><%= c.getEmail() %></td>
+            <td><%= c.getAddress().getCity() %></td>
           </tr>
             <% }%>
         </tbody>

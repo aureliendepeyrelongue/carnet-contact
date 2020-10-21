@@ -38,7 +38,7 @@ public class IndexController  {
 
     @RequestMapping(value="/test-bean", method= RequestMethod.GET)
     public String testBean() {
-   		String[] allBeanNames = context.getBeanDefinitionNames();
+   	/*	String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
@@ -49,7 +49,7 @@ public class IndexController  {
 
         dao.addContact(c2);
         dao.addContact(c);
-        
+        */
         return "index";
     }
     
