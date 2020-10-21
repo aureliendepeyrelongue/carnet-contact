@@ -15,7 +15,6 @@ import com.lip6.daos.DAOContact;
 import com.lip6.entities.Contact;
 
 @Controller
-@Scope("session")
 public class AuthenticationController {
 	
 	@Autowired

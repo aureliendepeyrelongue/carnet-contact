@@ -1,7 +1,10 @@
 package com.lip6.daos;
 
+import java.util.*;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+
 
 import org.springframework.stereotype.Repository;
 
@@ -17,45 +20,25 @@ public class DAOContactGroup implements IDAOContactGroup {
 	@Override
 	public boolean createGroup(String groupName) {
 		
-		//Avant l'utilisation de classe JpaUtil	
-		//EntityManagerFactory emf=Persistence.createEntityManagerFactory("projetJPA");
-		
-		//1: obtenir une connexion et un EntityManager, en passant par la classe JpaUtil
-		
+
 	    boolean success=false;
 
 		try {
 	    EntityManager em=JpaUtil.getEmf().createEntityManager();
 
-		// 2 : Ouverture transaction 
 		EntityTransaction tx =  em.getTransaction();
 		tx.begin();
-		
-		// 3 : Instanciation Objet(s) m�tier (s)
+
 		ContactGroup group = new ContactGroup(groupName);
 		
 		
-		// 4 : Persistance Objet/Relationnel : cr�ation d'un enregistrement en base
-		 
-		
 		em.persist(group);
-		
-		//ici l'objet est dans un �tat manag� par l'EM, pas besoin d'un nouveau persist
 	
-		
-		// 5 : Fermeture transaction 
 		tx.commit();
 		
-		
-		 
-		// 6 : Fermeture de l'EntityManager et de unit� de travail JPA 
 		em.close();
 		
-		// 7: Attention important, cette action ne doit s'executer qu'une seule fois et non pas à chaque instantiation du ContactDAO
-		//Donc, pense bien à ce qu'elle soit la dernière action de votre application
-		//JpaUtil.close();	
-		
-		// Tout faire dans addContact (num�ro de t�l�phone/ adresse pour l'instant)
+	
 		success=true;
 		}
 		catch (Exception e) {
@@ -63,6 +46,25 @@ public class DAOContactGroup implements IDAOContactGroup {
 			
 		}
 		return success;
+		
+	}
+	
+	@Override
+	public ContactGroup getContactGroupById(long id) {
+		
+		ContactGroup group = null;
+
+		try {
+	    EntityManager em=JpaUtil.getEmf().createEntityManager();
+
+		 group = em.find(ContactGroup.class,id);
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return group;
 		
 	}
 
@@ -143,4 +145,66 @@ public class DAOContactGroup implements IDAOContactGroup {
 		
 		return success;
 	}
-}
+	@SuppressWarnings("unchecked")
+	public List<ContactGroup> findAll(){
+		List<ContactGroup> cList = null;
+		
+		try {
+		    EntityManager em=JpaUtil.getEmf().createEntityManager();
+		    
+			cList = (List<ContactGroup>)em.createQuery("SELECT cg FROM ContactGroup cg").getResultList();
+		  
+		}
+		
+		catch(Exception e) {
+			
+			e.printStackTrace();
+		}
+		
+		return cList;
+	}
+	
+	
+	public boolean updateGroupByContacts(long groupId,String groupName, long[] contactIds) {
+    boolean success = false;
+		
+		try {
+		    EntityManager em=JpaUtil.getEmf().createEntityManager();
+			// 2 : Ouverture transaction 
+		  
+			EntityTransaction tx =  em.getTransaction();
+			tx.begin();
+			  Set<Contact> newContacts = new HashSet<Contact>();
+		
+			ContactGroup g = em.find(ContactGroup.class,groupId);
+			g.setGroupName(groupName);
+		    Set<Contact> oldContacts = g.getContacts();
+		    for(Contact c: oldContacts) {
+		    	c.getContactGroups().remove(g);
+		    }
+			for(long cId : contactIds) {
+			  newContacts.add(em.find(Contact.class,cId));
+			}
+			
+			for(Contact c : newContacts) {
+				c.getContactGroups().add(g);
+			}
+			g.setContacts(newContacts);
+		    
+			em.persist(g);
+		    			
+			tx.commit();
+			em.close();
+			success = true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+	
+		}
+		
+		
+		return success;
+	}
+		
+	}
+

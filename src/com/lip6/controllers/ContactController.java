@@ -26,7 +26,6 @@ import com.lip6.services.ContactService;
 import java.util.Map;
 
 @Controller
-@Scope("session")
 public class ContactController {
 	
 	@Autowired
@@ -42,10 +41,9 @@ public class ContactController {
 		return "contact-search";
 	}
 	
-	@RequestMapping(value="/contact-search-post", method = RequestMethod.POST)
+	@RequestMapping(value="/contact-search", method = RequestMethod.POST)
 	public String postContactSearch(ModelMap model,@RequestParam("search") String search) {
 		
-		System.out.println(search);
 		List<Contact> results = contactService.getSearchedContacts(search);
 		model.addAttribute("results", results);
 		

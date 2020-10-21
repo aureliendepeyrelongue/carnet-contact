@@ -35,7 +35,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 			<!--  quel type de comportement qu'on souhaite avoir au lancement de la base (drop and create pour le developpement, validate pour) -->
 			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="create" />
+				value="none" />
 			<!--  qu'est-ce que je dois utiliser pour la création des classes -->
 			<property
 				name="javax.persistence.schema-generation.create-source"
@@ -51,6 +51,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
+			<property name="connection.pool_size" value="100" />
+			
 		</properties>
 	</persistence-unit>
 </persistence>

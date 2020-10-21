@@ -20,16 +20,15 @@
 </div>
 
       <div class="row">
-    <form class="col s12">
+    <form class="col s12" method="POST">
       <div class="row">
         <div class="input-field col s12">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">Nom du groupe</label>
+          <input placeholder="Nom du groupe" id="group_name" name="groupName" type="text" class="validate">
+          <label for="group_name">Nom du groupe</label>
         </div>
    
       </div>
-    
-   
+
            <div class="row">
         <div class="input-field col s12">
          <button class="btn waves-effect waves-light right" type="submit" name="action">Créer
