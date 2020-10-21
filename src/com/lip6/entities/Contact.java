@@ -22,10 +22,10 @@ public class Contact implements Serializable {
 	private String email;
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne(cascade=CascadeType.PERSIST)
+	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval=true)
 	@JoinColumn(name="id_adress")
 	private Address address;
-	@OneToMany(cascade=CascadeType.ALL, mappedBy="contact")
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="contact", fetch = FetchType.EAGER, orphanRemoval = true)
 	Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 	@ManyToMany(cascade=CascadeType.PERSIST)
 	@JoinTable(name="CTC_GRP",
@@ -36,6 +36,13 @@ public class Contact implements Serializable {
 	public Contact(){
 	}
 
+	public Contact(String firstName, String lastName, String email) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+	}
+	 
 	public Contact(String firstName, String lastName, String email, Address adress) {
 		super();
 		this.firstName = firstName;
@@ -44,7 +51,7 @@ public class Contact implements Serializable {
 		this.address = adress;
 	}
 	
-	public Contact(String firstName, String lastName, String email, Address adress, Set phones) {
+	public Contact(String firstName, String lastName, String email, Address adress, Set<PhoneNumber> phones) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -106,6 +113,10 @@ public class Contact implements Serializable {
 
 	public void addPhoneNumber(PhoneNumber phone) {
 		this.phones.add(phone);
+	}
+	
+	public void removePhoneNumber(PhoneNumber phone) {
+		this.phones.remove(phone);
 	}
 
 	public Set<ContactGroup> getContactGroups() {
