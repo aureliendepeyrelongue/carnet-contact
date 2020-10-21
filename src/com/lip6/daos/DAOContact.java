@@ -3,6 +3,7 @@ package com.lip6.daos;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.Iterator;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -149,6 +150,178 @@ public class DAOContact implements IDAOContact{
 		
 	}
 	
+	public List<Contact> allContact() {
+
+
+        EntityManager em=JpaUtil.getEmf().createEntityManager();
+        EntityTransaction tx =  em.getTransaction();
+        tx.begin();
+
+        final String requete = "SELECT * FROM contacts";
+        List<Contact> allcontact=em.createNativeQuery(requete,Contact.class).getResultList();
+        return allcontact;
+	}
 	
+	public Contact infoContact(long Id) {
+
+		try {
+	    EntityManager em=JpaUtil.getEmf().createEntityManager();
+
+		EntityTransaction tx =  em.getTransaction();
+		tx.begin();
+		 
+		Contact contact = em.find(Contact.class, Id);
+		 
+		tx.commit();
+		
+		em.close();
+		
+		return contact;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+		
+	}
+	
+	public boolean deleteContact(long Id) {
+
+	    boolean success=false;
+
+		try {
+	    EntityManager em=JpaUtil.getEmf().createEntityManager();
+
+		EntityTransaction tx =  em.getTransaction();
+		tx.begin();
+		 
+		Contact contact = em.find(Contact.class, Id);
+		contact.setAddress(null);
+		em.remove(contact);
+
+		tx.commit();
+
+		em.close();
+		
+		success=true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return success;
+	}
+	
+	public boolean updateContact(long Id, String lastname, String firstname, String email, String street, String city, String zip, String country, Set<PhoneNumber> phones) {
+
+	    boolean success=false;
+
+		try {
+	    EntityManager em=JpaUtil.getEmf().createEntityManager();
+
+		EntityTransaction tx =  em.getTransaction();
+		tx.begin();
+		 
+		Contact contact = em.find(Contact.class, Id);
+		
+		
+		contact.setLastName(lastname);
+		contact.setFirstName(firstname);
+		contact.setEmail(email);
+		
+		contact.getAddress().setStreet(street);
+		contact.getAddress().setCity(city);
+		contact.getAddress().setZip(zip);
+		contact.getAddress().setCountry(country);
+		
+		Iterator<PhoneNumber> it1 = contact.getPhones().iterator();
+		Iterator<PhoneNumber> it2 = contact.getPhones().iterator();
+		Iterator<PhoneNumber> it3 = phones.iterator();
+		Iterator<PhoneNumber> it4 = phones.iterator();
+		
+		while(it1.hasNext() && it2.hasNext() && it3.hasNext() && it4.hasNext()) {
+			it1.next().setPhoneKind(it3.next().getPhoneKind());
+			it2.next().setPhoneNumber(it4.next().getPhoneNumber());
+		}
+
+		tx.commit();
+
+		em.close();
+		
+		success=true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return success;
+	}
+	
+	public boolean addPhone(long Id, Set<PhoneNumber> phones) {
+	    boolean success=false;
+
+		try {
+	    EntityManager em=JpaUtil.getEmf().createEntityManager();
+
+		EntityTransaction tx =  em.getTransaction();
+		tx.begin();
+		
+		Contact contact = em.find(Contact.class, Id);
+		
+		for(PhoneNumber p: phones) {
+			contact.addPhoneNumber(p);
+		}
+		
+		for(PhoneNumber s: contact.getPhones()) {
+			s.setContact(contact);
+			contact.getPhones().add(s);
+		}
+
+		tx.commit();
+
+		em.close();
+		
+		success=true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return success;
+	}
+	
+	public boolean deletePhone(long Id, Set<Long> ids) {
+	    boolean success=false;
+
+		try {
+	    EntityManager em=JpaUtil.getEmf().createEntityManager();
+
+		EntityTransaction tx =  em.getTransaction();
+		tx.begin();
+		
+		Contact contact = em.find(Contact.class, Id);
+		
+		for(long l: ids) {
+			System.out.println(l);
+			PhoneNumber number = em.find(PhoneNumber.class, l);
+			System.out.println(number.getPhoneKind());
+			System.out.println(number.getPhoneNumber());
+			System.out.println(contact.getPhones().size());
+			contact.removePhoneNumber(number);
+			System.out.println(contact.getPhones().size());
+		}
+
+		tx.commit();
+
+		em.close();
+		
+		success=true;
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			
+		}
+		return success;
+	}
 	
 }

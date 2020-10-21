@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
 
+import javax.servlet.http.HttpSession;
 
-
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,11 +26,24 @@ import java.util.Map;
 
 public class IndexController  {
 
-       
+	@Autowired
+	private ApplicationContext context;
  
 	@RequestMapping("/")
     public String index() {
       
+		String[] allBeanNames = context.getBeanDefinitionNames();
+        for(String beanName : allBeanNames) {
+            System.out.println(beanName + "******************");
+        }
+        
+        DAOContact dao = new DAOContact();
+        Contact c =(Contact) context.getBean("contact1");
+        Contact c2 =(Contact) context.getBean("contact2");
+
+        dao.addContact(c2);
+        dao.addContact(c);
+        
         return "index";
     }
 
