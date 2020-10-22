@@ -35,6 +35,9 @@ public class ContactGroupController {
 	ContactGroupService contactGroupService;
 	
 	@Autowired
+	ContactService contactService;
+	
+	@Autowired
 	DAOContactGroup daoContactGroup;
 	
 	@Autowired
@@ -46,13 +49,13 @@ public class ContactGroupController {
 	}
 	@RequestMapping(value="/contact-group-create", method=RequestMethod.POST)
 	public String postContactGroupCreate(@RequestParam String groupName) {
-		daoContactGroup.createGroup(groupName);
+		contactGroupService.addGroup(groupName);
 		return "contact-group-create";
 	}
 	
 	@RequestMapping("/contact-group-details")
 	public String getContactGroupDetails(ModelMap model, @RequestParam long groupId) {
-		ContactGroup cg = daoContactGroup.getContactGroupById(groupId);
+		ContactGroup cg = contactGroupService.getContactGroupById(groupId);
 		model.addAttribute("contactGroup",cg);
 		return "contact-group-details";
 	}
@@ -60,11 +63,11 @@ public class ContactGroupController {
 	@RequestMapping("/contact-group-update")
 	public String getContactGroupUpdate(ModelMap model, @RequestParam long groupId) {
 		
-		List<Contact> cList = daoContact.findAll();
+		List<Contact> cList = contactService.getAllContacts();
 		model.addAttribute("contactList",cList);
 		
 		
-		ContactGroup cg = daoContactGroup.getContactGroupById(groupId);
+		ContactGroup cg = contactGroupService.getContactGroupById(groupId);
 		model.addAttribute("contactGroup",cg);
 		return "contact-group-update";
 	}
@@ -78,8 +81,8 @@ public class ContactGroupController {
 			newContacts = contacts.get();
 		}
 
-		daoContactGroup.updateGroupByContacts(groupId,groupName, newContacts);
-		ContactGroup cg = daoContactGroup.getContactGroupById(groupId);
+		contactGroupService.updateGroupByContacts(groupId,groupName, newContacts);
+		ContactGroup cg = contactGroupService.getContactGroupById(groupId);
 		model.addAttribute("contactGroup",cg);
 		return "contact-group-details";
 	}
@@ -87,15 +90,15 @@ public class ContactGroupController {
 	
 	@RequestMapping("/contact-group-delete")
 	public String postContactGroupDelete(ModelMap model,@RequestParam long groupId) {
-		daoContactGroup.removeContactGroup(groupId);
-		List<ContactGroup> cgList = daoContactGroup.findAll();
+		contactGroupService.removeContactGroup(groupId);
+		List<ContactGroup> cgList = contactGroupService.getAllGroup();
 		model.addAttribute("groupList", cgList);
 		return "contact-group-list";
 	}
 	
 	@RequestMapping("/contact-group-list")
 	public String getContactGroupList(ModelMap model) {
-		List<ContactGroup> cgList = daoContactGroup.findAll();
+		List<ContactGroup> cgList = contactGroupService.getAllGroup();
 		model.addAttribute("groupList", cgList);
 		return "contact-group-list";
 	}

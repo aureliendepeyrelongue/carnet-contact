@@ -19,10 +19,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lip6.daos.DAOContact;
-
+import com.lip6.daos.DAOContactGroup;
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
 import com.lip6.entities.PhoneNumber;
+import com.lip6.services.ContactGroupService;
 import com.lip6.services.ContactService;
 
 import java.util.Map;
@@ -33,6 +34,8 @@ public class ContactController {
 	@Autowired
 	DAOContact daoContact;
 	
+	@Autowired
+	DAOContactGroup daoContactGroup;
 	
 	@Autowired
 	private ContactService contactService;
@@ -44,32 +47,8 @@ public class ContactController {
 
 	@RequestMapping(value = "/addContact", method = RequestMethod.POST)
 	public String addContact(@RequestParam Map<String, String> params) { 
-		String firstName = params.get("firstName");
-		String lastName = params.get("lastName");
-		String email = params.get("email");
-		String street = params.get("street");
-		String city = params.get("city");
-		String zip = params.get("zip");
-		String country = params.get("country");
-		int phone = Integer.parseInt(params.get("phone"));
-		Address address = new Address(street, city, zip, country);
-		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 		
-		for(int i=0; i<phone;i++) {
-			String phonekind  = params.get("phonekind"+i);
-			String phonenumber = params.get("phonenumber"+i);
-			PhoneNumber pn = new PhoneNumber(phonekind,phonenumber);
-			phones.add(pn);
-		}
-		
-		Contact contact = new Contact(firstName, lastName, email, address, phones);
-		
-		for(PhoneNumber s: contact.getPhones()) {
-			s.setContact(contact);
-			contact.getPhones().add(s);
-		}
-		
-		daoContact.addContact(contact);
+		contactService.addContact(params);
 		
 	    return "redirect:contact-list";
 	}
@@ -91,7 +70,7 @@ public class ContactController {
 	@RequestMapping("/contact-list")
 	public String getListContact(Model model) {
 		
-		List<Contact> cList = daoContact.findAll();
+		List<Contact> cList = contactService.getAllContacts();
 		model.addAttribute("contacts", cList);
 		
 		return "contact-list";
@@ -101,7 +80,7 @@ public class ContactController {
 	public String postInfoContact(@ModelAttribute("Id") long Id, BindingResult result,
             Model model) {
 		
-		Contact contact = daoContact.infoContact(Id);
+		Contact contact = contactService.getInfoContact(Id);
 		model.addAttribute("contact", contact);
 		return "contact-info";
 	}
@@ -110,7 +89,7 @@ public class ContactController {
 	public String postgetPhone(@ModelAttribute("Id") long Id, BindingResult result,
             Model model) {
 
-		Contact contact = daoContact.infoContact(Id);
+		Contact contact = contactService.getInfoContact(Id);
 		model.addAttribute("contact", contact);
 		return "contact-phone";
 	}
@@ -119,7 +98,7 @@ public class ContactController {
 	public String postgetPhone2(@ModelAttribute("Id") long Id, BindingResult result,
             Model model) {
 
-		Contact contact = daoContact.infoContact(Id);
+		Contact contact = contactService.getInfoContact(Id);
 		model.addAttribute("contact", contact);
 		return "contact-delete-phone";
 	}
@@ -127,7 +106,7 @@ public class ContactController {
 	@RequestMapping(value="/deleteContact", method = RequestMethod.POST)
 	public String deleteContact(@RequestParam("Id") String Id) {
 		
-		daoContact.deleteContact(Long.parseLong(Id));
+		contactService.deleteContact(Id);
 		return "redirect:contact-list";
 	}
 	
@@ -135,68 +114,30 @@ public class ContactController {
 	public String postgetContact(@ModelAttribute("Id") long Id, BindingResult result,
             Model model) {
 		
-		Contact contact = daoContact.infoContact(Id);
+		Contact contact = contactService.getInfoContact(Id);
 		model.addAttribute("contact", contact);
 		return "contact-update";
 	}
 	
 	@RequestMapping(value="/updateContact", method = RequestMethod.POST)
 	public String updateContact(@RequestParam Map<String, String> params) {
-		String Id = params.get("Id");
-		String firstName = params.get("firstName");
-		String lastName = params.get("lastName");
-		String email = params.get("email");
-		String street = params.get("street");
-		String city = params.get("city");
-		String zip = params.get("zip");
-		String country = params.get("country");
-		int phone = Integer.parseInt(params.get("phone"));
-		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
-		for(int i=1; i<=phone;i++) {
-			String phoneKind  = params.get("phoneKind"+i);
-			String phoneNumber = params.get("phoneNumber"+i);
-			PhoneNumber pn = new PhoneNumber(phoneKind,phoneNumber);
-			phones.add(pn);
-		}
-		daoContact.updateContact(Long.parseLong(Id), lastName, firstName, email, street, city, zip, country, phones);
+
+		contactService.updateContact(params);
 		return "redirect:contact-list";
 	}
 
 	@RequestMapping(value="/addPhone", method = RequestMethod.POST)
 	public String addPhone(@RequestParam Map<String, String> params) {
-		String Id = params.get("Id");
-		int phone = Integer.parseInt(params.get("phone"));
-
-		Set<PhoneNumber> phones = new HashSet<PhoneNumber>();
 		
-		for(int i=0; i<phone;i++) {
-			String phonekind  = params.get("phonekind"+i);
-			String phonenumber = params.get("phonenumber"+i);
-			PhoneNumber pn = new PhoneNumber(phonekind,phonenumber);
-			phones.add(pn);
-		}
-		
-		daoContact.addPhone(Long.parseLong(Id), phones);
-		
+		contactService.addPhone(params);
 		return "redirect:contact-list";
 		
 	}
 	
 	@RequestMapping(value="/deletePhone", method = RequestMethod.POST)
 	public String deletePhone(@RequestParam Map<String, String> params) {
-		String Id = params.get("Id");
-		int phone = Integer.parseInt(params.get("phone"));
-		Set<Long> ids = new HashSet<Long>();
 		
-		for(int i=1; i<=phone;i++) {
-			String id_ = params.get("x"+i);
-			if(id_ != null && !id_.isEmpty()) {
-				ids.add(Long.parseLong(id_));
-			}
-		}
-		
-		daoContact.deletePhone(Long.parseLong(Id), ids);
-		
+		contactService.deletePhone(params);
 		return "redirect:contact-list";
 		
 	}

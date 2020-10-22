@@ -2,6 +2,7 @@ package com.lip6.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +54,23 @@ public class ContactGroupService {
 		return results;
 	}
 	
+	public void addGroup(String groupName) {
+		daoContactGroup.createGroup(groupName);
+	}
 
-
+	public ContactGroup getContactGroupById(long groupId) {
+		return daoContactGroup.getContactGroupById(groupId);
+	}
+	
+	public void updateGroupByContacts(long groupId, String groupName, long[] newContacts) {
+		daoContactGroup.updateGroupByContacts(groupId, groupName, newContacts);
+	}
+	 
+	public void removeContactGroup(long groupId) {
+		daoContactGroup.removeContactGroup(groupId);
+	}
+	
+	public List<ContactGroup> getAllGroup() {
+		return daoContactGroup.findAll();
+	}
 }
