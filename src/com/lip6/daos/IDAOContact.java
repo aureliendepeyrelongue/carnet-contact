@@ -10,15 +10,10 @@ import java.util.Set;
 import com.lip6.entities.Contact;
 import com.lip6.entities.PhoneNumber;
 
-@Repository
 
 public interface IDAOContact {
 
-	public boolean addContact(String lastname, String firstname, String email, String street, String city, String zip, String country);
-
 	public boolean addContact(Contact contact);
-
-	public List<Contact> allContact();
 	
 	public Contact infoContact(long Id);
 	

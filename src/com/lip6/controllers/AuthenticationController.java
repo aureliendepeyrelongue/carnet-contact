@@ -20,7 +20,6 @@ public class AuthenticationController {
 	@Autowired
 	DAOContact daoContact;
 	
-	
 	@RequestMapping("/login")
 	public String getLogin() {
 		return "login";
@@ -56,8 +55,6 @@ public class AuthenticationController {
 		session.removeAttribute("firstName");
 		return "index";
 	}
-	
-	
 	
 
 }

@@ -7,6 +7,7 @@ import javax.persistence.EntityTransaction;
 
 
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.lip6.entities.Address;
 import com.lip6.entities.Contact;
@@ -16,11 +17,9 @@ import com.lip6.util.JpaUtil;
 
 @Repository
 public class DAOContactGroup implements IDAOContactGroup {
-
 	@Override
 	public boolean createGroup(String groupName) {
 		
-
 	    boolean success=false;
 
 		try {
@@ -31,14 +30,11 @@ public class DAOContactGroup implements IDAOContactGroup {
 
 		ContactGroup group = new ContactGroup(groupName);
 		
-		
 		em.persist(group);
 	
-		tx.commit();
-		
+        tx.commit();
 		em.close();
 		
-	
 		success=true;
 		}
 		catch (Exception e) {
@@ -50,18 +46,21 @@ public class DAOContactGroup implements IDAOContactGroup {
 	}
 	
 	@Override
+	@Transactional
 	public ContactGroup getContactGroupById(long id) {
 		
 		ContactGroup group = null;
 
 		try {
-	    EntityManager em=JpaUtil.getEmf().createEntityManager();
-
-		 group = em.find(ContactGroup.class,id);
-
+		EntityManager em=JpaUtil.getEmf().createEntityManager();
+		EntityTransaction tx =  em.getTransaction();
+		tx.begin();
+		group = em.find(ContactGroup.class,id);
+		tx.commit();
+		em.close();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+		e.printStackTrace();
 			
 		}
 		return group;
@@ -114,13 +113,9 @@ public class DAOContactGroup implements IDAOContactGroup {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			
-			
 		}
-		
-		
+			
 		return success;
-		
 	}
 	
 	public boolean removeContactGroup(long groupId) {
@@ -134,12 +129,12 @@ public class DAOContactGroup implements IDAOContactGroup {
 			ContactGroup g = em.find(ContactGroup.class,groupId);
 		    em.remove(g);			
 			tx.commit();
+			em.close();
 			success = true;
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-			
-			
+	
 		}
 		
 		
@@ -150,10 +145,13 @@ public class DAOContactGroup implements IDAOContactGroup {
 		List<ContactGroup> cList = null;
 		
 		try {
-		    EntityManager em=JpaUtil.getEmf().createEntityManager();
-		    
+			  EntityManager em=JpaUtil.getEmf().createEntityManager();
+			EntityTransaction tx =  em.getTransaction();
+			tx.begin();
+			
 			cList = (List<ContactGroup>)em.createQuery("SELECT cg FROM ContactGroup cg").getResultList();
-		  
+			tx.commit();
+			em.close();
 		}
 		
 		catch(Exception e) {
@@ -170,11 +168,9 @@ public class DAOContactGroup implements IDAOContactGroup {
 		
 		try {
 		    EntityManager em=JpaUtil.getEmf().createEntityManager();
-			// 2 : Ouverture transaction 
-		  
 			EntityTransaction tx =  em.getTransaction();
 			tx.begin();
-			  Set<Contact> newContacts = new HashSet<Contact>();
+			Set<Contact> newContacts = new HashSet<Contact>();
 		
 			ContactGroup g = em.find(ContactGroup.class,groupId);
 			g.setGroupName(groupName);
@@ -199,7 +195,6 @@ public class DAOContactGroup implements IDAOContactGroup {
 		}
 		catch (Exception e) {
 			e.printStackTrace();
-	
 		}
 		
 		

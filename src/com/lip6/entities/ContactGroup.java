@@ -21,7 +21,7 @@ public class ContactGroup implements Serializable {
 	private String groupName;
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@ManyToMany(mappedBy="contactGroups",cascade = CascadeType.PERSIST)
+	@ManyToMany(mappedBy="contactGroups",fetch = FetchType.EAGER,cascade = CascadeType.PERSIST)
 	private Set <Contact> contacts=new HashSet<Contact>();
 	
 	public ContactGroup(){

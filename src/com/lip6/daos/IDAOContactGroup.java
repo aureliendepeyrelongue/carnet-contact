@@ -4,7 +4,7 @@ import org.springframework.stereotype.Repository;
 
 import com.lip6.entities.ContactGroup;
 
-@Repository
+
 public interface IDAOContactGroup {
 
 	public boolean createGroup(String groupname);

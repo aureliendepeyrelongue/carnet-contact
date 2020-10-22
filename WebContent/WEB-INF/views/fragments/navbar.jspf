@@ -1,7 +1,7 @@
 
 <ul id="dropdown-contact" class="dropdown-content">
      <li><a class="blue-text" href="/CarnetContactStart/contact-create">Créer un contact</a></li>
-     <li><a href="/CarnetContactStart/contact-list">Liste des contacts</a></li>
+     <li><a class="blue-text" href="/CarnetContactStart/contact-list">Liste des contacts</a></li>
      <li><a  class="blue-text" href="/CarnetContactStart/contact-search">Rechercher des contacts</a></li>
        
 </ul>
@@ -16,7 +16,6 @@
     <div class="nav-wrapper container">
     <a id="logo-container" href="/CarnetContactStart/" class="brand-logo valign-wrapper" style="font-size:1.8rem;"><i class="large material-icons">texture</i><span style="display:flex;"><span style="margin:auto;">Carnet Contact</span></span></a>
       
-  
       <ul class="right hide-on-med-and-down">
 
        <li><a class="dropdown-trigger blue darken-4" href="#!" data-target="dropdown-contact">Actions contacts<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -36,7 +35,6 @@
        <% 
         }
        %>
- 
 
       </ul>
 
@@ -45,6 +43,5 @@
       </ul>
       <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
      
-  
     </div>
   </nav>

@@ -49,7 +49,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 				value="META-INF/drop.sql" />
 
 
-			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.format_sql" value="true" />
 			<property name="connection.pool_size" value="10000" />
 			
