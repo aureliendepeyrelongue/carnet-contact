@@ -43,12 +43,18 @@ public class ContactService {
 				String firstName = Util.cleanString(c.getFirstName());
 				String lastName = Util.cleanString(c.getLastName());
 				String email = Util.cleanString(c.getEmail());
+				String city = Util.cleanString(c.getAddress().getCity());
+				String country = Util.cleanString(c.getAddress().getCountry());
+				String zipCode = Util.cleanString(c.getAddress().getZip());
 				
 				for(int i = 0 ; i < arr.length && !keep; i++) {
 					String criteria = arr[i];
 					if(firstName.contains(criteria) ||
 							lastName.contains(criteria) ||
-							email.contains(criteria)) {
+							email.contains(criteria) ||
+							city.contains(criteria) ||
+							country.contains(criteria) || 
+							zipCode.contains(criteria)) {
 						keep = true;
 					}
 					

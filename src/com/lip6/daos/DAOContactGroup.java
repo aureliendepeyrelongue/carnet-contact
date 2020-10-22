@@ -127,6 +127,9 @@ public class DAOContactGroup implements IDAOContactGroup {
 			EntityTransaction tx =  em.getTransaction();
 			tx.begin();
 			ContactGroup g = em.find(ContactGroup.class,groupId);
+		     for(Contact c : g.getContacts()) {
+		    	 c.getContactGroups().remove(g);
+		     }
 		    em.remove(g);			
 			tx.commit();
 			em.close();

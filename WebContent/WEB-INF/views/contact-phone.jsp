@@ -50,12 +50,16 @@
   <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
       <div class="row">
         <div class="input-field col s12">
-			<label>Nombre de numéro de téléphone: (max. 10)</label>
-				<input type="text" id="phone" name="phone" ><br/><br>
-				<a href="#" id="filldetails" onclick="addFields()">Créer les champs</a>
+				<input type="text" id="phone" name="phone" >
+				     <label for="phone">Nombre de numéro de téléphone: (max. 10)</label>
+        	</div>
+        </div>
+        <div class="row">
+        <div class="col s12">
+        	<a href="#" id="filldetails" onclick="addFields()">Créer les champs</a>
 		    	<div id="container">
 		    	</div>
-        	</div>
+        </div>
         </div>
            <div class="row">
         <div class="input-field col s12">
@@ -69,7 +73,7 @@
 </form>
 </div>
 </div>
-  .<%@ include file="./fragments/footer.jspf" %>
-   .<%@ include file="./fragments/scripts.jspf" %>
+  <%@ include file="./fragments/footer.jspf" %>
+   <%@ include file="./fragments/scripts.jspf" %>
 </body>
 </html>

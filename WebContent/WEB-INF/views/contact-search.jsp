@@ -46,6 +46,9 @@
       <p><%= c.getEmail() %><br>
         <%= c.getAddress().getCountry()%><br>
          <%= c.getAddress().getZip()%> - <%= c.getAddress().getCity()%> - <%= c.getAddress().getStreet()%>
+      <form  method="post" action="/CarnetContactStart/findContact">
+       <input type="hidden" name="Id" value="<%= c.getId() %>"/>
+      <a onclick="parentNode.submit();" style="cursor:pointer;">Voir le profil de <%= c.getFirstName() %> -></a></form>
       </p>
       <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
     </li>

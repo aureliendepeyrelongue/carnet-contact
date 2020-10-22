@@ -32,12 +32,6 @@ import java.util.Map;
 public class ContactController {
 	
 	@Autowired
-	DAOContact daoContact;
-	
-	@Autowired
-	DAOContactGroup daoContactGroup;
-	
-	@Autowired
 	private ContactService contactService;
 	
 	@RequestMapping("/contact-create")

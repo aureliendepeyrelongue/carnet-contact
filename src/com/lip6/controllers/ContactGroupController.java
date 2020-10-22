@@ -37,11 +37,6 @@ public class ContactGroupController {
 	@Autowired
 	ContactService contactService;
 	
-	@Autowired
-	DAOContactGroup daoContactGroup;
-	
-	@Autowired
-	DAOContact daoContact;
 	
 	@RequestMapping("/contact-group-create")
 	public String getContactGroupCreate() {
@@ -50,7 +45,7 @@ public class ContactGroupController {
 	@RequestMapping(value="/contact-group-create", method=RequestMethod.POST)
 	public String postContactGroupCreate(@RequestParam String groupName) {
 		contactGroupService.addGroup(groupName);
-		return "contact-group-create";
+		return "redirect:contact-group-list";
 	}
 	
 	@RequestMapping("/contact-group-details")
@@ -91,9 +86,7 @@ public class ContactGroupController {
 	@RequestMapping("/contact-group-delete")
 	public String postContactGroupDelete(ModelMap model,@RequestParam long groupId) {
 		contactGroupService.removeContactGroup(groupId);
-		List<ContactGroup> cgList = contactGroupService.getAllGroup();
-		model.addAttribute("groupList", cgList);
-		return "contact-group-list";
+		return "redirect:contact-group-list";
 	}
 	
 	@RequestMapping("/contact-group-list")
