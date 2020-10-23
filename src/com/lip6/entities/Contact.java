@@ -22,7 +22,7 @@ public class Contact implements Serializable {
 	private String email;
 	@Id@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@OneToOne(cascade=CascadeType.PERSIST, orphanRemoval=true)
+	@OneToOne(cascade=CascadeType.PERSIST,orphanRemoval=true)
 	@JoinColumn(name="id_adress")
 	private Address address;
 	@OneToMany(cascade=CascadeType.ALL, mappedBy="contact", fetch = FetchType.EAGER, orphanRemoval = true)

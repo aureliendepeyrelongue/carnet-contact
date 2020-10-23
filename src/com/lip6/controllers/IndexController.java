@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.lip6.daos.DAOContact;
 import com.lip6.daos.DAOContactGroup;
@@ -36,9 +37,9 @@ public class IndexController  {
         return "index";
     }
 
-    @RequestMapping(value="/test-bean", method= RequestMethod.GET)
-    public String testBean() {
-   	/*	String[] allBeanNames = context.getBeanDefinitionNames();
+    @RequestMapping(value="/add-data-by-bean", method= RequestMethod.GET)
+    public  ModelAndView testBean() {
+   	String[] allBeanNames = context.getBeanDefinitionNames();
         for(String beanName : allBeanNames) {
             System.out.println(beanName + "******************");
         }
@@ -49,8 +50,8 @@ public class IndexController  {
 
         dao.addContact(c2);
         dao.addContact(c);
-        */
-        return "index";
+    
+        return new ModelAndView("redirect:/contact-list");
     }
     
     @RequestMapping("/add-data")

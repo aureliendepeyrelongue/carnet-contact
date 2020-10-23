@@ -17,7 +17,7 @@
          while (container.hasChildNodes()) {
              container.removeChild(container.lastChild);
          }
-         for (i=0;i<number;i++){
+         for (i=0;i<number && i < 10;i++){
              container.appendChild(document.createTextNode("Type de numéro  " + (i+1)));
              var input = document.createElement("input");
              input.type = "text";
@@ -50,14 +50,19 @@
   <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
       <div class="row">
         <div class="input-field col s12">
-				<input type="text" id="phone" name="phone" >
+				<input type="number" id="phone" name="phone" max="10" >
 				     <label for="phone">Nombre de numéro de téléphone: (max. 10)</label>
         	</div>
         </div>
         <div class="row">
         <div class="col s12">
-        	<a href="#" id="filldetails" onclick="addFields()">Créer les champs</a>
-		    	<div id="container">
+        	<a href="#" id="filldetails" class="btn" onclick="addFields()">Créer les champs</a>
+		    	
+        </div>
+        </div>
+        <div class="row">
+        <div class="col s12">
+        <div id="container">
 		    	</div>
         </div>
         </div>

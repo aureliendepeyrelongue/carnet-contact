@@ -85,8 +85,8 @@
         <div class="input-field col s6">
          <form class="col s12" method="post" action="/CarnetContactStart/getPhone2">
          <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
-         <button class="btn waves-effect waves-light right" type="submit" name="maj">Supprimer numeros
-    		<i class="material-icons left">send</i>
+         <button class="btn waves-effect red waves-light right" type="submit" name="maj">Supprimer numeros
+    		<i class="material-icons left">close</i>
   		 </button>
   		 </form>
        </div>
@@ -94,18 +94,19 @@
         
       <div class="row">
         <div class="input-field col s6">
-        <form class="col s12" method="post" action="/CarnetContactStart/deleteContact">
-         <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
-         <button class="btn waves-effect waves-red left" type="submit" name="suppr">Supprimer
-    		<i class="material-icons left">send</i>
-  		 </button>
-  		</form>
-        </div>
-        <div class="input-field col s6">
          <form class="col s12" method="post" action="/CarnetContactStart/getContact">
          <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
-         <button class="btn waves-effect waves-light right" type="submit" name="maj">Mettre à jour
-    		<i class="material-icons left">send</i>
+         <button class="btn waves-effect waves-light left" type="submit" name="maj">Mettre à jour le contact
+    		<i class="material-icons left">refresh</i>
+  		 </button>
+  		</form>
+       
+        </div>
+        <div class="input-field col s6">
+         <form class="col s12" method="post" action="/CarnetContactStart/deleteContact">
+         <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
+         <button class="btn waves-effect red waves-red right" type="submit" name="suppr">Supprimer le contact
+    		<i class="material-icons left">close</i>
   		 </button>
   		</form>
         </div>

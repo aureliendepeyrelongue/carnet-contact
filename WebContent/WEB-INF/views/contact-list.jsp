@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@page import="com.lip6.entities.Contact"%>
@@ -25,7 +26,12 @@
         </tr>
     </thead>
     <tbody>
-    <%for (Contact c: (java.util.ArrayList<Contact>) request.getAttribute("contacts")){%>
+    <%
+    
+    ArrayList<Contact> contacts = (ArrayList<Contact>) request.getAttribute("contacts");
+    
+    if(contacts != null){
+    for (Contact c: contacts){%>
         <tr>
         	<td><%= c.getId() %></td>
             <td><form class="col s12" method="post" action="/CarnetContactStart/findContact">
@@ -35,7 +41,9 @@
             <td><%= c.getEmail() %></td>
             <td><%= c.getAddress().getCity() %></td>
         </tr>
-    <%}%>
+    <%}
+    
+    }%>
     </tbody>
 </table>
 </div>

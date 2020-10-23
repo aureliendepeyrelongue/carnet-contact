@@ -35,6 +35,7 @@ if(loginAncestor != null && loginAncestor.equals("true") && authenticated != nul
       </div>
       <div class="row center">
         <a href="/CarnetContactStart/contact-create" id="download-button" class="btn-large waves-effect blue darken-3  waves-light">C'est parti !</a>
+       <a href="/CarnetContactStart/add-data-by-bean" class="btn-large waves-effect darken-3 waves-light">Ajouter des données</a>
       </div>
       <br><br>
     </div>

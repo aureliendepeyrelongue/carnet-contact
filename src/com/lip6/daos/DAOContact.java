@@ -30,7 +30,7 @@ public class DAOContact implements IDAOContact{
 	    EntityManager em=JpaUtil.getEmf().createEntityManager();
 		EntityTransaction tx =  em.getTransaction();
 		tx.begin();
-	
+
 		em.persist(contact);
 		
 		tx.commit();
@@ -197,7 +197,7 @@ public class DAOContact implements IDAOContact{
 			EntityTransaction tx =  em.getTransaction();
 			tx.begin();
 		
-			List<Contact>cList = (List<Contact>)em.createQuery("SELECT * FROM Contact c WHERE c.lastName LIKE :lastName AND c.email LIKE :email")
+			List<Contact>cList = (List<Contact>)em.createQuery("SELECT c FROM Contact c WHERE c.lastName LIKE :lastName AND c.email LIKE :email")
 					.setParameter("lastName", lastName)
 					.setParameter("email", email)
 					.getResultList();

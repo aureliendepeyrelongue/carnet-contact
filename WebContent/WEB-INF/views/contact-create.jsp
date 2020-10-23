@@ -16,7 +16,7 @@
          while (container.hasChildNodes()) {
              container.removeChild(container.lastChild);
          }
-         for (i=0;i<number;i++){
+         for (i=0;i<number && i < 10 ;i++){
              container.appendChild(document.createTextNode("Type de numéro  " + (i+1)));
              var input = document.createElement("input");
              input.type = "text";
@@ -48,11 +48,11 @@
     <form class="col s12" method="post" action="/CarnetContactStart/addContact">
       <div class="row">
         <div class="input-field col s6">
-          <input placeholder="Placeholder" name="firstName" type="text" class="validate"/>
+          <input id="firstName" placeholder="Placeholder" name="firstName" type="text" class="validate"/>
           <label for="firstName">Prénom</label>
         </div>
         <div class="input-field col s6">
-          <input name="lastName" type="text" class="validate">
+          <input id="lastName" name="lastName" type="text" class="validate">
           <label for="lastName">Nom de famille</label>
         </div>
       </div>
@@ -60,42 +60,53 @@
    
       <div class="row">
         <div class="input-field col s12">
-          <input name="email" type="email" class="validate">
+          <input  id="email" name="email" type="email" class="validate">
           <label for="email">Email</label>
         </div>
       </div>
        <div class="row">
         <div class="input-field col s12">
-          <input name="street" type="text" class="validate">
+          <input id="street" name="street" type="text" class="validate">
           <label for="street">Rue</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input name="city" type="text" class="validate">
+          <input id="city" name="city" type="text" class="validate">
           <label for="city">Ville</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input name="zip" type="text" class="validate">
+          <input id="zip" name="zip" type="text" class="validate">
           <label for="zip">Code Postal</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-          <input name="country" type="text" class="validate">
+          <input id="country" name="country" type="text" class="validate">
           <label for="country">Pays</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col s12">
-			<label>Nombre de numéro de téléphone: (max. 10)</label>
-				<input type="text" id="phone" name="phone" ><br/><br>
-				<a href="#" id="filldetails" onclick="addFields()">Créer les champs</a>
-		    	<div id="container">
-		    	</div>
+			<label for="phone" >Nombre de numéro de téléphone: (max. 10)</label>
+				<input type="number" max="10" id="phone" name="phone" ><br/><br>
+		
         	</div>
+        </div>
+       
+        <div class="row">
+        <div class="col s12">
+        	<a href="#" id="filldetails" class="btn" onclick="addFields()">Créer les champs</a>
+		    	
+        </div>
+        </div>
+        <div class="row">
+        <div class="col s12">
+        <div id="container">
+		    	</div>
+        </div>
         </div>
       </div>
            <div class="row">

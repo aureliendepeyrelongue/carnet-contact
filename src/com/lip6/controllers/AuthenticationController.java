@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.lip6.daos.DAOContact;
 import com.lip6.entities.Contact;
+import com.lip6.services.ContactService;
 
 @Controller
 public class AuthenticationController {
 	
 	@Autowired
-	DAOContact daoContact;
+	ContactService contactService;
 	
 	@RequestMapping("/login")
 	public String getLogin() {
@@ -29,7 +30,7 @@ public class AuthenticationController {
 	public String postLogin(HttpServletRequest request, ModelMap model, @RequestParam String email, @RequestParam String lastName) {
 		HttpSession session = request.getSession();
 
-		Contact c = daoContact.findContactByLastNameAndEmail(lastName, email);
+		Contact c = contactService.findContactByLastNameAndEmail(lastName, email);
 		
 		if(c != null) {
 			session.setAttribute("authenticated", "true");

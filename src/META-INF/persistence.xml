@@ -15,7 +15,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 		<class>com.lip6.entities.Adress</class>
 		<class>com.lip6.entities.PhoneNumber</class>
 		<class>com.lip6.entities.Group</class>
-		
+
 		<properties>
 			<!-- Login -->
 			<property name="javax.persistence.jdbc.user" value="root" />
@@ -35,7 +35,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 			<!--  quel type de comportement qu'on souhaite avoir au lancement de la base (drop and create pour le developpement, validate pour) -->
 			<property
 				name="javax.persistence.schema-generation.database.action"
-				value="none" />
+				value="drop-and-create" />
 			<!--  qu'est-ce que je dois utiliser pour la création des classes -->
 			<property
 				name="javax.persistence.schema-generation.create-source"
@@ -49,10 +49,8 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 				value="META-INF/drop.sql" />
 
 
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.format_sql" value="true" />
-			<property name="connection.pool_size" value="10000" />
-			
 		</properties>
 	</persistence-unit>
 </persistence>

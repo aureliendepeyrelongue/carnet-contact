@@ -16,32 +16,58 @@
 	   
 	<% Contact contact = (Contact) request.getAttribute("contact"); %>
 	<% int i = 0; %>
+	    <div class="row">
+    <div class="col s12">
+    <h5 class="header grey-text ">Supprimer un/des numéros</h5>
+</div>
+</div>
 	
+	<div class="row">
 	<form class="col s12" method="post" action="/CarnetContactStart/deletePhone">
+	
      <input type="hidden" name="Id" value="<%=contact.getId() %>"/>
-     <%for (PhoneNumber p: (java.util.Set<PhoneNumber>) contact.getPhones()){
+    
+     
+     <table>
+	<thead>
+        <tr>
+        	<th > Check </th>
+            <th > Type </th>
+            <th > Numéro </th>
+          
+        </tr>
+    </thead>
+    <tbody>
+   <%for (PhoneNumber p: (java.util.Set<PhoneNumber>) contact.getPhones()){
      	i = i + 1;
      %>
-     <div class="row">
-       <div class="col s6">
-       <label>
+        <tr>
+        <td> <label>
        	<input type="checkbox" id="check" name="x<%=i%>" value="<%= p.getId() %>"/>
        	<span></span>
-       </label>
-       </div>
-       <div class="input-field col s6">
+       </label></td>
+         <td>
 			<%= p.getPhoneKind() %>
-       </div>
-       <div class="input-field col s6">
+       </td>
+       <td >
 			<%= p.getPhoneNumber() %>
-       </div>
-     </div>
-     <%} %>
+       </td>
+        </tr>
+    <%}%>
+    </tbody>
+</table>
+  
+ 
      <input type="hidden" name="phone" value="<%= i%>"/>
-	          <button class="btn waves-effect waves-light right" type="submit" name="maj">Supprimer
-			<i class="material-icons left">send</i>
+         <div class="input-field col s12">
+	          <button class="btn waves-effect waves-light red right" type="submit" name="maj">Supprimer
+			<i class="material-icons left">close</i>
 	 </button>
+	 </div>
 	</form>
+	</div>
 </div>
+  <%@ include file="./fragments/footer.jspf" %>
+   <%@ include file="./fragments/scripts.jspf" %>
 </body>
 </html>

@@ -161,4 +161,8 @@ public class ContactService {
 		
 		daoContact.deletePhone(Long.parseLong(Id), ids);
 	}
+	
+	public Contact findContactByLastNameAndEmail(String lastName,String email) {
+		return daoContact.findContactByLastNameAndEmail(lastName, email);
+	}
 }
